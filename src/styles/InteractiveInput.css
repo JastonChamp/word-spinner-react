@@ -1,0 +1,43 @@
+.interactive-input {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.interactive-input label {
+  font-size: 1.2rem;
+}
+
+.interactive-input input {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #74b9ff;
+  border-radius: 0.5rem;
+  transition: border-color 0.3s;
+}
+
+.interactive-input input.incorrect {
+  border-color: #ff7675;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%, 75% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+}
+
+.interactive-input button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.interactive-input button:hover {
+  background: #74b9ff;
+}
