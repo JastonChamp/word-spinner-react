@@ -1,0 +1,13 @@
+header {
+padding: 1rem;
+}
+
+.header-content h1 {
+font-size: 2.5rem;
+margin: 0;
+}
+
+.header-content p {
+font-size: 1.2rem;
+margin: 0.5rem 0;
+}
