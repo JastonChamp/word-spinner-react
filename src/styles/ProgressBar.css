@@ -1,0 +1,29 @@
+.progress-container {
+display: flex;
+align-items: center;
+gap: 1rem;
+margin: 1rem 0;
+}
+
+.progress-icon {
+font-size: 1.5rem;
+}
+
+#progressBar {
+flex: 1;
+height: 1rem;
+background: #dfe6e9;
+border-radius: 0.5rem;
+overflow: hidden;
+}
+
+#progressFill {
+height: 100%;
+background: #74b9ff;
+transition: width 0.3s ease;
+}
+
+#progressText {
+font-size: 1rem;
+color: #636e72;
+}
