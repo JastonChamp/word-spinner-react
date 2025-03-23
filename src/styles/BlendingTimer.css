@@ -1,0 +1,50 @@
+#blendingTimerContainer {
+  margin: 1rem 0;
+}
+
+.timer-label {
+  font-size: 1.2rem;
+  color: #2d3436;
+}
+
+body[data-theme="space"] .timer-label {
+  color: #e4e4e4;
+}
+
+body[data-theme="forest"] .timer-label {
+  color: #444;
+}
+
+body[data-theme="high-contrast"] .timer-label {
+  color: #000;
+}
+
+#blendingTimer {
+  width: 100%;
+  height: 1rem;
+  background: #dfe6e9;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.timer-fill {
+  height: 100%;
+  background: #74b9ff;
+  transition: width linear;
+}
+
+#blendingTimerContainer button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  margin: 0.5rem;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#blendingTimerContainer button:hover {
+  background: #74b9ff;
+}
