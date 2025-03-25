@@ -1,24 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useContext } from 'react';
 import { GameContext } from '../context/GameContext';
 import '../styles/ComplimentBox.css';
 
 const ComplimentBox = () => {
-  const { state, setState } = useContext(GameContext);
+  const { state, dispatch } = useContext(GameContext);
 
   useEffect(() => {
     if (state.compliment) {
       const timer = setTimeout(() => {
-        setState(prev => ({ ...prev, compliment: '' }));
-      }, 2000);
+        dispatch({ type: 'CLEAR_COMPLIMENT' });
+      }, 3000);
       return () => clearTimeout(timer);
     }
-  }, [state.compliment]);
+  }, [state.compliment, dispatch]); // Added dispatch to dependencies
 
   if (!state.compliment) return null;
 
   return (
-    <div id="complimentBox" className="compliment-box show" aria-live="assertive">
-      {state.compliment}
+    <div className="compliment-box">
+      <p>{state.compliment}</p>
     </div>
   );
 };
