@@ -26,14 +26,22 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case 'SPIN_WORD':
-      // Logic to select a new word
-      return { ...state, currentWord: 'cat' }; // Example
+      // Logic to select a new word (simplified for now)
+      return { ...state, currentWord: 'cat', showInteractiveInput: true };
     case 'REPEAT_WORD':
       // Logic to repeat the current word
       return state;
     case 'SHOW_HINT':
       // Logic to show a hint
       return state;
+    case 'SHOW_PARENTAL_GATE':
+      return { ...state, showParentalGate: action.payload };
+    case 'UPDATE_DIFFICULTY':
+      return { ...state, ...action.payload };
+    case 'CORRECT_ANSWER':
+      return { ...state, ...action.payload };
+    case 'INCORRECT_ANSWER':
+      return { ...state, ...action.payload };
     default:
       return state;
   }
@@ -41,6 +49,9 @@ const reducer = (state, action) => {
 
 export const GameProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Log the context value for debugging
+  console.log('Providing GameContext with:', { state, dispatch });
 
   return (
     <GameContext.Provider value={{ state, dispatch }}>
