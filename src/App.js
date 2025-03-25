@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { GameProvider, GameContext } from './context/GameContext';
 import Header from './components/Header';
 import WordDisplay from './components/WordDisplay';
@@ -12,23 +12,44 @@ import InteractiveInput from './components/InteractiveInput';
 import ComplimentBox from './components/ComplimentBox';
 import PhonicsIntroModal from './components/PhonicsIntroModal';
 import Confetti from 'react-confetti';
-import { initSpeech, playSound } from './utils/speech'; // Import speech utilities
+import { initSpeech, playSound } from './utils/speech';
 import './styles/App.css';
 
 const AppContent = () => {
-  const { state, dispatch } = useContext(GameContext); // Changed setState to dispatch
+  const { state, dispatch } = useContext(GameContext);
+  const [hasInteracted, setHasInteracted] = useState(false); // Track user interaction
 
   useEffect(() => {
     // Initialize speech synthesis
     initSpeech();
 
-    // Play the start sound when the app loads
-    playSound('start', state.soundsEnabled);
-
     // Update body attributes for theme and font
     document.body.dataset.theme = state.theme;
     document.body.dataset.font = state.fontStyle;
-  }, [state.theme, state.fontStyle, state.soundsEnabled]);
+  }, [state.theme, state.fontStyle]);
+
+  // Play start sound after user interaction
+  useEffect(() => {
+    if (hasInteracted && state.soundsEnabled) {
+      console.log('User has interacted, playing start sound');
+      playSound('start', state.soundsEnabled);
+    }
+  }, [hasInteracted, state.soundsEnabled]);
+
+  // Listen for user interaction
+  useEffect(() => {
+    const handleInteraction = () => {
+      setHasInteracted(true);
+    };
+
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('keydown', handleInteraction);
+
+    return () => {
+      window.removeEventListener('click', handleInteraction);
+      window.removeEventListener('keydown', handleInteraction);
+    };
+  }, []);
 
   return (
     <div className="app-wrapper">
@@ -56,7 +77,7 @@ const AppContent = () => {
             id="toggleSettingsButton"
             aria-expanded={state.showSettings}
             aria-controls="advancedSettings"
-            onClick={() => dispatch({ type: 'SHOW_PARENTAL_GATE', payload: true })} // Changed to dispatch
+            onClick={() => dispatch({ type: 'SHOW_PARENTAL_GATE', payload: true })}
           >
             ⚙️ {state.showSettings ? 'Hide Settings' : 'Customize'}
           </button>
