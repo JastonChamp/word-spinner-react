@@ -3,7 +3,7 @@ import { GameContext } from '../context/GameContext';
 import '../styles/ActionButtons.css';
 
 const ActionButtons = () => {
- const { state, dispatch } = useContext(GameContext);
+ const { dispatch } = useContext(GameContext); // Removed state
 
  const handleSpin = () => {
  dispatch({ type: 'SPIN_WORD' });
