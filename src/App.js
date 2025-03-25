@@ -12,15 +12,23 @@ import InteractiveInput from './components/InteractiveInput';
 import ComplimentBox from './components/ComplimentBox';
 import PhonicsIntroModal from './components/PhonicsIntroModal';
 import Confetti from 'react-confetti';
+import { initSpeech, playSound } from './utils/speech'; // Import speech utilities
 import './styles/App.css';
 
 const AppContent = () => {
-  const { state, setState } = useContext(GameContext); // Added setState
+  const { state, dispatch } = useContext(GameContext); // Changed setState to dispatch
 
   useEffect(() => {
+    // Initialize speech synthesis
+    initSpeech();
+
+    // Play the start sound when the app loads
+    playSound('start', state.soundsEnabled);
+
+    // Update body attributes for theme and font
     document.body.dataset.theme = state.theme;
     document.body.dataset.font = state.fontStyle;
-  }, [state.theme, state.fontStyle]);
+  }, [state.theme, state.fontStyle, state.soundsEnabled]);
 
   return (
     <div className="app-wrapper">
@@ -48,7 +56,7 @@ const AppContent = () => {
             id="toggleSettingsButton"
             aria-expanded={state.showSettings}
             aria-controls="advancedSettings"
-            onClick={() => setState(prev => ({ ...prev, showParentalGate: true }))}
+            onClick={() => dispatch({ type: 'SHOW_PARENTAL_GATE', payload: true })} // Changed to dispatch
           >
             ⚙️ {state.showSettings ? 'Hide Settings' : 'Customize'}
           </button>
