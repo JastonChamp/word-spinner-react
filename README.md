@@ -4,7 +4,12 @@
 
 **Word Spinner** is a React-based phonics learning web app designed for young children to practice blending and reading skills. It features a playful interface, adaptive difficulty, accessibility options, and alignment with educational standards like the Singapore MOE phonics curriculum.
 
+## Live Demo
+
+Try the app live at [https://JastonChamp.github.io/word-spinner-react/](https://JastonChamp.github.io/word-spinner-react/)!
+
 ## Table of Contents
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
@@ -22,6 +27,7 @@
 - **Educational Alignment:** Word lists are aligned with the Singapore MOE phonics curriculum.
 - **Engaging Design:** Playful animations, confetti celebrations, and immediate feedback to motivate young learners.
 - **Tutorial and Phonics Intro:** Interactive tutorial for first-time users and a phonics basics introduction.
+- **Real Audio Files:** Includes real `.mp3` audio files for phoneme sounds, long vowels, and start sounds to enhance the learning experience.
 
 ## Prerequisites
 Before you begin, ensure you have the following installed:
