@@ -40,3 +40,4 @@ Before you begin, ensure you have the following installed:
    ```bash
    git clone https://github.com/JastonChamp/word-spinner-react.git
    cd word-spinner-react
+![Word Spinner Screenshot](assets/screenshot.png)
