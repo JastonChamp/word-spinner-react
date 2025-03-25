@@ -5,8 +5,9 @@ import '../styles/ActionButtons.css';
 const ActionButtons = () => {
   const context = useContext(GameContext);
 
-  // Log the context to debug
+  // Log the full context value to debug
   console.log('GameContext value:', context);
+  console.log('Is dispatch a function?', typeof context?.dispatch === 'function');
 
   // Fallback if dispatch is undefined
   const dispatch = context?.dispatch || (() => console.error('Dispatch is not available'));
