@@ -15,7 +15,7 @@ import Confetti from 'react-confetti';
 import './styles/App.css';
 
 const AppContent = () => {
-  const { state } = useContext(GameContext);
+  const { state, setState } = useContext(GameContext); // Added setState
 
   useEffect(() => {
     document.body.dataset.theme = state.theme;
