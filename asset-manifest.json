@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/word-spinner-react/static/css/main.e6833e7f.css",
-    "main.js": "/word-spinner-react/static/js/main.2a27aa0d.js",
+    "main.js": "/word-spinner-react/static/js/main.f23cf809.js",
     "index.html": "/word-spinner-react/index.html",
     "main.e6833e7f.css.map": "/word-spinner-react/static/css/main.e6833e7f.css.map",
-    "main.2a27aa0d.js.map": "/word-spinner-react/static/js/main.2a27aa0d.js.map"
+    "main.f23cf809.js.map": "/word-spinner-react/static/js/main.f23cf809.js.map"
   },
   "entrypoints": [
     "static/css/main.e6833e7f.css",
-    "static/js/main.2a27aa0d.js"
+    "static/js/main.f23cf809.js"
   ]
 }
