@@ -40,4 +40,4 @@ Before you begin, ensure you have the following installed:
    ```bash
    git clone https://github.com/JastonChamp/word-spinner-react.git
    cd word-spinner-react
-Triggering deployment to GitHub Pages to fix start.mp3 and dispatch issues.
+Triggering deployment to GitHub Pages to fix start.mp3 404 error.
