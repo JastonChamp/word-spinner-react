@@ -1,6 +1,9 @@
 let voice = null;
 const audioCache = new Map();
 
+// Use the correct base path for GitHub Pages
+const BASE_PATH = '/word-spinner-react';
+
 export const initSpeech = async () => {
   return new Promise(resolve => {
     const checkVoices = () => {
@@ -27,7 +30,9 @@ export const speakWord = async (text, soundsEnabled) => {
 
 export const preloadAudio = (sounds) => {
   sounds.forEach(sound => {
-    const audio = new Audio(`/audio/${sound}.mp3`);
+    const audioUrl = `${BASE_PATH}/audio/${sound}.mp3`;
+    console.log(`Preloading audio: ${audioUrl}`); // Debug log
+    const audio = new Audio(audioUrl);
     audio.preload = 'auto';
     audioCache.set(sound, audio);
   });
@@ -36,7 +41,9 @@ export const preloadAudio = (sounds) => {
 export const playSound = async (sound, soundsEnabled) => {
   if (!soundsEnabled) return;
   try {
-    const audio = audioCache.get(sound) || new Audio(`/audio/${sound}.mp3`);
+    const audioUrl = `${BASE_PATH}/audio/${sound}.mp3`;
+    console.log(`Playing audio: ${audioUrl}`); // Debug log
+    const audio = audioCache.get(sound) || new Audio(audioUrl);
     await audio.play();
   } catch (e) {
     console.error(`Audio playback error for ${sound}.mp3:`, e);
