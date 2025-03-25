@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'; // Added useEffect
+import React, { useContext, useState, useEffect } from 'react';
 import { GameContext } from '../context/GameContext';
 import { speakWord } from '../utils/speech';
 import '../styles/InteractiveInput.css';
@@ -8,9 +8,8 @@ const InteractiveInput = () => {
   const [input, setInput] = useState('');
   const [isIncorrect, setIsIncorrect] = useState(false);
 
-  // Moved useEffect to the top level
   useEffect(() => {
-    if (!state.showInteractiveInput) return; // Early return inside useEffect
+    if (!state.showInteractiveInput) return;
 
     if (state.successStreak >= 5 && state.difficultyLevel < 2) {
       setState(prev => ({
@@ -31,7 +30,7 @@ const InteractiveInput = () => {
       }));
       if (state.soundsEnabled) speakWord('Let’s try some easier words.', state.soundsEnabled);
     }
-  }, [state.successStreak, state.showInteractiveInput, state.soundsEnabled, setState]); // Added dependencies
+  }, [state.successStreak, state.showInteractiveInput, state.soundsEnabled, state.difficultyLevel, setState]); // Added state.difficultyLevel
 
   if (!state.showInteractiveInput) return null;
 
