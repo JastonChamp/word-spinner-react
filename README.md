@@ -40,4 +40,4 @@ Before you begin, ensure you have the following installed:
    ```bash
    git clone https://github.com/JastonChamp/word-spinner-react.git
    cd word-spinner-react
-Triggering deployment to GitHub Pages after fixing ActionButtons.js and InteractiveInput.js.
+Triggering deployment to GitHub Pages to fix dispatch in GameContext.
