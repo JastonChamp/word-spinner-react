@@ -1,61 +1,49 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { initSpeech } from '../utils/speech';
+import React, { createContext, useReducer } from 'react';
 
 export const GameContext = createContext();
 
+const initialState = {
+  score: 0,
+  currentWord: '',
+  successStreak: 0,
+  revealedWords: 0,
+  showInteractiveInput: false,
+  showConfetti: false,
+  compliment: '',
+  difficultyLevel: 1,
+  wordType: 'cvc',
+  usedWords: new Set(),
+  soundsEnabled: true,
+  animationsEnabled: true,
+  theme: 'light',
+  fontStyle: 'default',
+  showSettings: false,
+  showParentalGate: false,
+  showBlendingTimer: false,
+  blendingTime: 10,
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'SPIN_WORD':
+      // Logic to select a new word
+      return { ...state, currentWord: 'cat' }; // Example
+    case 'REPEAT_WORD':
+      // Logic to repeat the current word
+      return state;
+    case 'SHOW_HINT':
+      // Logic to show a hint
+      return state;
+    default:
+      return state;
+  }
+};
+
 export const GameProvider = ({ children }) => {
-  const [state, setState] = useState({
-    score: 0,
-    revealedWords: 0,
-    totalWords: 0,
-    usedWords: new Set(),
-    currentWord: '',
-    blendingTime: 3000,
-    soundsEnabled: true,
-    wordType: 'cvc',
-    vowelFilter: 'all',
-    theme: 'default',
-    celebrationMode: false,
-    animationsEnabled: true,
-    fontStyle: 'default',
-    successStreak: 0,
-    difficultyLevel: 1,
-    isTimerPaused: false,
-    showBlendingTimer: false,
-    blendingTimeElapsed: 0,
-    showParentalGate: false,
-    showSettings: false,
-    showTutorial: !localStorage.getItem('hasSeenTutorial'),
-    showPhonicsIntro: !localStorage.getItem('hasSeenPhonicsIntro'),
-    showInteractiveInput: false,
-    showConfetti: false,
-    compliment: '',
-  });
-
-  useEffect(() => {
-    const savedPrefs = JSON.parse(localStorage.getItem('wordSpinnerPrefs')) || {};
-    setState(prev => ({
-      ...prev,
-      ...savedPrefs,
-      usedWords: new Set(savedPrefs.usedWords || []),
-      showTutorial: !localStorage.getItem('hasSeenTutorial'),
-      showPhonicsIntro: !localStorage.getItem('hasSeenPhonicsIntro'),
-    }));
-  }, []);
-
-  useEffect(() => {
-    initSpeech();
-  }, []);
-
-  const savePreferences = () => {
-    localStorage.setItem('wordSpinnerPrefs', JSON.stringify({
-      ...state,
-      usedWords: Array.from(state.usedWords),
-    }));
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <GameContext.Provider value={{ state, setState, savePreferences }}>
+    <GameContext.Provider value={{ state, dispatch }}>
       {children}
     </GameContext.Provider>
   );
