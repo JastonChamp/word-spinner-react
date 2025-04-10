@@ -1,4 +1,6 @@
-import React, { createContext, useReducer } from 'react';
+import React, { createContext, useReducer, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { getWordGroups, loadWordGroups } from '../utils/wordGroups';
 
 export const GameContext = createContext();
 
@@ -7,6 +9,7 @@ const initialState = {
   currentWord: '',
   successStreak: 0,
   revealedWords: 0,
+  totalWords: 0,
   showInteractiveInput: false,
   showConfetti: false,
   compliment: '',
@@ -21,18 +24,32 @@ const initialState = {
   showParentalGate: false,
   showBlendingTimer: false,
   blendingTime: 10,
+  vowelFilter: 'all',
+  celebrationMode: true,
+  mode: 'phonics',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'SPIN_WORD':
-      // Logic to select a new word (simplified for now)
-      return { ...state, currentWord: 'cat', showInteractiveInput: true };
+    case 'SPIN_WORD': {
+      const wordGroups = getWordGroups();
+      const words = state.vowelFilter === 'all'
+        ? Object.values(wordGroups[state.wordType] || {}).flat()
+        : wordGroups[state.wordType]?.[state.vowelFilter] || [];
+      const availableWords = words.filter(word => !state.usedWords.has(word));
+      const newWord = availableWords[Math.floor(Math.random() * availableWords.length)] || words[0];
+      const newUsedWords = new Set(state.usedWords);
+      newUsedWords.add(newWord);
+      return {
+        ...state,
+        currentWord: newWord,
+        showInteractiveInput: true,
+        usedWords: newUsedWords,
+      };
+    }
     case 'REPEAT_WORD':
-      // Logic to repeat the current word
       return state;
     case 'SHOW_HINT':
-      // Logic to show a hint
       return state;
     case 'SHOW_PARENTAL_GATE':
       return { ...state, showParentalGate: action.payload };
@@ -42,6 +59,22 @@ const reducer = (state, action) => {
       return { ...state, ...action.payload };
     case 'INCORRECT_ANSWER':
       return { ...state, ...action.payload };
+    case 'SET_TOTAL_WORDS':
+      return { ...state, totalWords: action.payload };
+    case 'UPDATE_THEME':
+      return { ...state, theme: action.payload };
+    case 'UPDATE_BLENDING_TIME':
+      return { ...state, blendingTime: action.payload };
+    case 'TOGGLE_CELEBRATION_MODE':
+      return { ...state, celebrationMode: action.payload };
+    case 'TOGGLE_ANIMATIONS':
+      return { ...state, animationsEnabled: action.payload };
+    case 'TOGGLE_FONT_STYLE':
+      return { ...state, fontStyle: action.payload };
+    case 'TOGGLE_SOUNDS':
+      return { ...state, soundsEnabled: action.payload };
+    case 'SET_MODE':
+      return { ...state, mode: action.payload, usedWords: new Set(), revealedWords: 0 };
     default:
       return state;
   }
@@ -49,9 +82,19 @@ const reducer = (state, action) => {
 
 export const GameProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { i18n } = useTranslation();
 
-  // Log the context value for debugging
-  console.log('Providing GameContext with:', { state, dispatch });
+  useEffect(() => {
+    const initializeWords = async () => {
+      await loadWordGroups();
+      const wordGroups = getWordGroups();
+      const words = state.vowelFilter === 'all'
+        ? Object.values(wordGroups[state.wordType] || {}).flat()
+        : wordGroups[state.wordType]?.[state.vowelFilter] || [];
+      dispatch({ type: 'SET_TOTAL_WORDS', payload: words.length });
+    };
+    initializeWords();
+  }, [state.wordType, state.vowelFilter, i18n.language]);
 
   return (
     <GameContext.Provider value={{ state, dispatch }}>
