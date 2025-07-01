@@ -1,8 +1,8 @@
 let voice = null;
 const audioCache = new Map();
 
-// Use the correct base path for GitHub Pages
-const BASE_PATH = '/word-spinner-react';
+// Base path for static assets depending on deployment location
+const BASE_PATH = process.env.PUBLIC_URL || '';
 
 export const initSpeech = async () => {
   return new Promise(resolve => {
