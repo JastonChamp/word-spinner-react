@@ -7,7 +7,7 @@ import '../styles/Modal.css';
 Modal.setAppElement('#root');
 
 const TutorialModal = () => {
-  const { state, setState } = useContext(GameContext);
+  const { state, dispatch } = useContext(GameContext);
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
@@ -16,14 +16,14 @@ const TutorialModal = () => {
 
   const handleStart = () => {
     localStorage.setItem('hasSeenTutorial', 'true');
-    setState(prev => ({ ...prev, showTutorial: false }));
+    dispatch({ type: 'SET_PREFERENCES', payload: { showTutorial: false } });
     if (state.soundsEnabled) playSound('start', state.soundsEnabled);
   };
 
-  const handleSkip = () => {
-    localStorage.setItem('hasSeenTutorial', 'true');
-    setState(prev => ({ ...prev, showTutorial: false }));
-  };
+const handleSkip = () => {
+  localStorage.setItem('hasSeenTutorial', 'true');
+  dispatch({ type: 'SET_PREFERENCES', payload: { showTutorial: false } });
+};
 
   return (
     <Modal
