@@ -1,5 +1,4 @@
 jest.mock('react-i18next', () => ({ useTranslation: () => ({ i18n: { language: 'en' } }) }), { virtual: true });
-jest.mock('react-i18next', () => ({ useTranslation: () => ({ i18n: { language: 'en' } }) }), { virtual: true });
 jest.mock('../utils/wordGroups', () => ({ getWordGroups: jest.fn(), loadWordGroups: jest.fn() }));
 jest.mock('../utils/speech', () => ({ speakWord: jest.fn() }));
 
@@ -7,7 +6,6 @@ import { reducer, initialState } from '../context/GameContext';
 import { getWordGroups } from '../utils/wordGroups';
 import { speakWord } from '../utils/speech';
 
-import { reducer, initialState } from '../context/GameContext';
 
 describe('GameContext reducer', () => {
   it('toggles settings visibility', () => {
