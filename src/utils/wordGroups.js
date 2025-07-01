@@ -4,7 +4,7 @@ let wordGroups = {};
 
 export const loadWordGroups = async () => {
   try {
-    const response = await fetch('/wordGroups.json');
+   const response = await fetch(`${process.env.PUBLIC_URL}/wordGroups.json`);
     wordGroups = await response.json();
   } catch (error) {
     console.error('Failed to load word groups:', error);
