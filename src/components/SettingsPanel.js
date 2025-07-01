@@ -3,31 +3,35 @@ import { GameContext } from '../context/GameContext';
 import '../styles/SettingsPanel.css';
 
 const SettingsPanel = () => {
-  const { state, setState, savePreferences } = useContext(GameContext);
+  const { state, dispatch, savePreferences } = useContext(GameContext);
 
   if (!state.showSettings) return null;
 
   const handleWordTypeChange = (e) => {
-    setState(prev => ({
-      ...prev,
-      wordType: e.target.value,
-      usedWords: new Set(),
-      revealedWords: 0,
-      currentWord: '',
-      showInteractiveInput: false,
-    }));
+    dispatch({
+      type: 'SET_PREFERENCES',
+      payload: {
+        wordType: e.target.value,
+        usedWords: new Set(),
+        revealedWords: 0,
+        currentWord: '',
+        showInteractiveInput: false,
+      },
+    });
     savePreferences();
   };
 
   const handleVowelChange = (e) => {
-    setState(prev => ({
-      ...prev,
-      vowelFilter: e.target.value,
-      usedWords: new Set(),
-      revealedWords: 0,
-      currentWord: '',
-      showInteractiveInput: false,
-    }));
+    dispatch({
+      type: 'SET_PREFERENCES',
+      payload: {
+        vowelFilter: e.target.value,
+        usedWords: new Set(),
+        revealedWords: 0,
+        currentWord: '',
+        showInteractiveInput: false,
+      },
+    });
     savePreferences();
   };
 
@@ -73,7 +77,7 @@ const SettingsPanel = () => {
               id="themeSelector"
               value={state.theme}
               onChange={(e) => {
-                setState(prev => ({ ...prev, theme: e.target.value }));
+                dispatch({ type: 'SET_PREFERENCES', payload: { theme: e.target.value } });
                 savePreferences();
               }}
             >
@@ -89,26 +93,26 @@ const SettingsPanel = () => {
           <div className="time-adjust" id="blendingDelayInput">
             <button
               onClick={() => {
-                setState(prev => ({
-                  ...prev,
-                  blendingTime: prev.blendingTime > 1000 ? prev.blendingTime - 500 : prev.blendingTime,
-                }));
+                dispatch({
+                  type: 'SET_PREFERENCES',
+                  payload: { blendingTime: Math.max(1, state.blendingTime - 1) },
+                });
                 savePreferences();
               }}
-              aria-label="Decrease blending time by 0.5 seconds"
+              aria-label="Decrease blending time"
             >
               ➖
             </button>
-            <span id="blendingTimeDisplay">{state.blendingTime / 1000}</span>
+            <span id="blendingTimeDisplay">{state.blendingTime}</span>
             <button
               onClick={() => {
-                setState(prev => ({
-                  ...prev,
-                  blendingTime: prev.blendingTime < 7000 ? prev.blendingTime + 500 : prev.blendingTime,
-                }));
+                dispatch({
+                  type: 'SET_PREFERENCES',
+                  payload: { blendingTime: Math.min(20, state.blendingTime + 1) },
+                });
                 savePreferences();
               }}
-              aria-label="Increase blending time by 0.5 seconds"
+              aria-label="Increase blending time"
             >
               ➕
             </button>
@@ -120,7 +124,7 @@ const SettingsPanel = () => {
               type="checkbox"
               checked={state.celebrationMode}
               onChange={(e) => {
-                setState(prev => ({ ...prev, celebrationMode: e.target.checked }));
+                dispatch({ type: 'SET_PREFERENCES', payload: { celebrationMode: e.target.checked } });
                 savePreferences();
               }}
             />
@@ -131,7 +135,7 @@ const SettingsPanel = () => {
               type="checkbox"
               checked={state.animationsEnabled}
               onChange={(e) => {
-                setState(prev => ({ ...prev, animationsEnabled: e.target.checked }));
+                dispatch({ type: 'SET_PREFERENCES', payload: { animationsEnabled: e.target.checked } });
                 savePreferences();
               }}
             />
@@ -142,10 +146,7 @@ const SettingsPanel = () => {
               type="checkbox"
               checked={state.fontStyle === 'dyslexia'}
               onChange={(e) => {
-                setState(prev => ({
-                  ...prev,
-                  fontStyle: e.target.checked ? 'dyslexia' : 'default',
-                }));
+                dispatch({ type: 'SET_PREFERENCES', payload: { fontStyle: e.target.checked ? 'dyslexia' : 'default' } });
                 savePreferences();
               }}
             />
@@ -155,10 +156,7 @@ const SettingsPanel = () => {
         <div className="settings-buttons">
           <button
             onClick={() => {
-              setState(prev => ({
-                ...prev,
-                soundsEnabled: !prev.soundsEnabled,
-              }));
+              dispatch({ type: 'SET_PREFERENCES', payload: { soundsEnabled: !state.soundsEnabled } });
               savePreferences();
             }}
           >
