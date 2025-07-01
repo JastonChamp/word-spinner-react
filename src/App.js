@@ -11,6 +11,8 @@ import TutorialModal from './components/TutorialModal';
 import InteractiveInput from './components/InteractiveInput';
 import ComplimentBox from './components/ComplimentBox';
 import PhonicsIntroModal from './components/PhonicsIntroModal';
+import BadgeDisplay from './components/BadgeDisplay';
+import ScoreIncrement from './components/ScoreIncrement';
 import Confetti from 'react-confetti';
 import { initSpeech, playSound } from './utils/speech';
 import './styles/App.css';
@@ -58,10 +60,12 @@ const AppContent = () => {
       <Header />
       <main className="container">
         <section className="core-controls" aria-label="Game Controls">
-          <div className="score-section">
+        <div className="score-section" style={{ position: 'relative' }}>
             <p id="scoreText">
               Score: <span id="scoreValue" aria-live="polite">{state.score}</span>
             </p>
+   <ScoreIncrement />
+            <BadgeDisplay />
           </div>
           <WordDisplay />
           <ActionButtons />
