@@ -27,6 +27,8 @@ const initialState = {
   vowelFilter: 'all',
   celebrationMode: true,
   mode: 'phonics',
+  showTutorial: false,
+  showPhonicsIntro: false,
 };
 
 const reducer = (state, action) => {
@@ -65,6 +67,8 @@ const reducer = (state, action) => {
       return { ...state, theme: action.payload };
     case 'UPDATE_BLENDING_TIME':
       return { ...state, blendingTime: action.payload };
+    case 'HIDE_BLENDING_TIMER':
+      return { ...state, showBlendingTimer: false };
     case 'TOGGLE_CELEBRATION_MODE':
       return { ...state, celebrationMode: action.payload };
     case 'TOGGLE_ANIMATIONS':
@@ -73,6 +77,12 @@ const reducer = (state, action) => {
       return { ...state, fontStyle: action.payload };
     case 'TOGGLE_SOUNDS':
       return { ...state, soundsEnabled: action.payload };
+    case 'CLEAR_COMPLIMENT':
+      return { ...state, compliment: '', showConfetti: false };
+    case 'TOGGLE_SETTINGS':
+      return { ...state, showSettings: !state.showSettings };
+    case 'SET_PREFERENCES':
+      return { ...state, ...action.payload };
     case 'SET_MODE':
       return { ...state, mode: action.payload, usedWords: new Set(), revealedWords: 0 };
     default:
@@ -83,6 +93,30 @@ const reducer = (state, action) => {
 export const GameProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { i18n } = useTranslation();
+
+  const savePreferences = () => {
+    const prefs = {
+      wordType: state.wordType,
+      vowelFilter: state.vowelFilter,
+      theme: state.theme,
+      blendingTime: state.blendingTime,
+      celebrationMode: state.celebrationMode,
+      animationsEnabled: state.animationsEnabled,
+      fontStyle: state.fontStyle,
+      soundsEnabled: state.soundsEnabled,
+    };
+    localStorage.setItem('preferences', JSON.stringify(prefs));
+  };
+
+  useEffect(() => {
+    const stored = localStorage.getItem('preferences');
+    if (stored) {
+      dispatch({ type: 'SET_PREFERENCES', payload: JSON.parse(stored) });
+    }
+    const hasSeenTutorial = localStorage.getItem('hasSeenTutorial') === 'true';
+    const hasSeenPhonics = localStorage.getItem('hasSeenPhonicsIntro') === 'true';
+    dispatch({ type: 'SET_PREFERENCES', payload: { showTutorial: !hasSeenTutorial, showPhonicsIntro: !hasSeenPhonics } });
+  }, []);
 
   useEffect(() => {
     const initializeWords = async () => {
@@ -97,7 +131,7 @@ export const GameProvider = ({ children }) => {
   }, [state.wordType, state.vowelFilter, i18n.language]);
 
   return (
-    <GameContext.Provider value={{ state, dispatch }}>
+    <GameContext.Provider value={{ state, dispatch, savePreferences }}>
       {children}
     </GameContext.Provider>
   );
