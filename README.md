@@ -77,3 +77,55 @@ Before you begin, ensure you have the following installed:
    ```bash
    git clone https://github.com/JastonChamp/word-spinner-react.git
    cd word-spinner-react
+ npm install
+   npm start
+   ```
+2. **Run Tests:**
+   ```bash
+   npm test
+   ```
+3. **Build for Production:**
+   ```bash
+   npm run build
+   ```
+   This creates an optimized `build` folder for deployment to static hosting services like GitHub Pages.
+
+## Usage
+After starting the development server, open `http://localhost:3000` in your browser. Spin the wheels, blend the sounds, and type the resulting word. Use the settings panel (gear icon) to switch word lists, change languages, or toggle accessibility options like a dyslexia-friendly font.
+
+## Project Structure
+```
+public/
+  index.html
+  wordGroups.json
+src/
+  components/
+  context/
+  styles/
+  utils/
+  i18n.js
+  index.js
+  App.js
+```
+- **components/** houses React components such as `WordDisplay`, `SettingsPanel`, and various modals.
+- **context/** contains shared state logic through `GameContext`.
+- **utils/** provides helper functions like audio playback.
+- **__tests__/** includes unit tests for components and context logic.
+
+## Technologies Used
+- React 18 and React Scripts
+- React Modal and React Confetti
+- Testing Library (React & Jest)
+- Service Worker for offline support
+- Node.js and npm
+
+## Troubleshooting
+- If `npm start` fails, remove `node_modules` and run `npm install` again.
+- Ensure your browser allows audio playback; some browsers block autoplay by default.
+- For issues loading word lists or audio files, check the developer console for network errors.
+
+## Contributing
+Contributions are welcome! Open an issue to discuss improvements or features. This project builds on the earlier **CVCwords** repo, so pull requests that enhance accessibility and phonics accuracy are appreciated.
+
+## License
+Licensed under the Apache 2.0 License. See the [LICENSE](LICENSE) file for full details.
