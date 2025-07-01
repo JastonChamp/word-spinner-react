@@ -4,7 +4,7 @@ import { getWordGroups, loadWordGroups } from '../utils/wordGroups';
 
 export const GameContext = createContext();
 
-const initialState = {
+export const initialState = {
   score: 0,
   currentWord: '',
   successStreak: 0,
@@ -31,7 +31,7 @@ const initialState = {
   showPhonicsIntro: false,
 };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case 'SPIN_WORD': {
       const wordGroups = getWordGroups();
