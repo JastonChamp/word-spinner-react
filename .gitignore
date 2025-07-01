@@ -1,6 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
+# Allow package-lock.json to be committed
+#! Exclude lines: package-lock.json is now tracked
 
 # Build output
 build/
