@@ -6,11 +6,11 @@ import '../styles/Modal.css';
 Modal.setAppElement('#root');
 
 const PhonicsIntroModal = () => {
-  const { state, setState } = useContext(GameContext);
+const { state, dispatch } = useContext(GameContext);
 
   const handleClose = () => {
     localStorage.setItem('hasSeenPhonicsIntro', 'true');
-    setState(prev => ({ ...prev, showPhonicsIntro: false }));
+    dispatch({ type: 'SET_PREFERENCES', payload: { showPhonicsIntro: false } });
   };
 
   return (
