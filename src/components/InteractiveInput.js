@@ -40,18 +40,24 @@ const InteractiveInput = () => {
 
  const handleSubmit = () => {
  if (input.toLowerCase() === state.currentWord) {
- dispatch({ // Changed setState to dispatch
- type: 'CORRECT_ANSWER',
- payload: {
- score: state.score + 10,
- successStreak: state.successStreak + 1,
- revealedWords: state.revealedWords + 1,
- showInteractiveInput: false,
- showConfetti: true,
- compliment: ['Great Job!', 'Awesome!', 'You’re a Star!', 'Well Done!', 'Fantastic!'][Math.floor(Math.random() * 5)],
- },
- });
- if (state.soundsEnabled) speakWord('Great Job!', state.soundsEnabled);
+    dispatch({
+      type: 'CORRECT_ANSWER',
+      payload: {
+        score: state.score + 10,
+        successStreak: state.successStreak + 1,
+        revealedWords: state.revealedWords + 1,
+        showInteractiveInput: false,
+        showConfetti: true,
+        compliment: ['Great Job!', 'Awesome!', 'You’re a Star!', 'Well Done!', 'Fantastic!'][Math.floor(Math.random() * 5)],
+      },
+    });
+    dispatch({ type: 'SHOW_SCORE_INCREMENT', payload: 10 });
+
+    const nextRevealed = state.revealedWords + 1;
+    if (nextRevealed === 1) dispatch({ type: 'ADD_BADGE', payload: 'First Word' });
+    if (nextRevealed === 5) dispatch({ type: 'ADD_BADGE', payload: '5 Words' });
+
+    if (state.soundsEnabled) speakWord('Great Job!', state.soundsEnabled);
  setInput('');
  setIsIncorrect(false);
  } else {
