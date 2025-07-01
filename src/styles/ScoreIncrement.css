@@ -1,0 +1,13 @@
+.score-increment {
+  position: absolute;
+  right: 0;
+  top: -0.5rem;
+  color: #e67e22;
+  font-weight: 700;
+  animation: scorePop 1s forwards;
+}
+
+@keyframes scorePop {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-1rem); }
+}
