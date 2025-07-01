@@ -78,7 +78,7 @@ const InteractiveInput = () => {
  aria-label="Type the word"
  className={isIncorrect ? 'incorrect' : ''}
  />
- <button onClick={handleSubmit}>Submit</ button>
+ <button onClick={handleSubmit}>Submit</button>
  </div>
  );
 };
