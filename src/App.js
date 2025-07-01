@@ -31,8 +31,7 @@ const AppContent = () => {
   // Play start sound after user interaction
   useEffect(() => {
     if (hasInteracted && state.soundsEnabled) {
-      console.log('User has interacted, playing start sound');
-      playSound('start', state.soundsEnabled);
+          playSound('start', state.soundsEnabled);
     }
   }, [hasInteracted, state.soundsEnabled]);
 
