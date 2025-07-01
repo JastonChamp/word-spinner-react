@@ -1,6 +1,5 @@
 # Word Spinner React
 
-![Word Spinner Screenshot](path/to/screenshot.png) <!-- Replace with a screenshot of the app if available -->
 
 **Word Spinner** is a React-based phonics learning web app designed for young children to practice blending and reading skills. It features a playful interface, adaptive difficulty, accessibility options, and alignment with educational standards like the Singapore MOE phonics curriculum.
 
