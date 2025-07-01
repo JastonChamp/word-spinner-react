@@ -12,62 +12,76 @@ export const loadWordGroups = async () => {
     wordGroups = {
       en: {
         cvc: {
-          a: ['cat', 'hat', 'bat'],
-          e: ['bed', 'red', 'pen'],
-          i: ['big', 'dig', 'pin'],
-          o: ['dog', 'log', 'top'],
-          u: ['bug', 'hug', 'sun']
+        import i18n from 'i18next'; // Import i18n to access the current language
+
+let wordGroups = {};
+
+export const loadWordGroups = async () => {
+  try {
+   const response = await fetch(`${process.env.PUBLIC_URL}/wordGroups.json`);
+    wordGroups = await response.json();
+  } catch (error) {
+    console.error('Failed to load word groups:', error);
+    // Fallback to a more complete word list if offline and cache fails
+    wordGroups = {
+      en: {
+        cvc: {
+          a: ['bat', 'cat', 'dad', 'fan', 'hat', 'jam', 'mad', 'nap', 'pan', 'rat', 'sad', 'tan', 'wag', 'zap', 'lap'],
+          e: ['bed', 'den', 'fed', 'get', 'hen', 'jet', 'leg', 'men', 'net', 'pen', 'red', 'set', 'ten', 'vet', 'web'],
+          i: ['big', 'dig', 'fin', 'hit', 'jig', 'kid', 'lip', 'mix', 'nip', 'pig', 'pin', 'sit', 'tin', 'wig', 'zip'],
+          o: ['box', 'cot', 'dog', 'fog', 'hop', 'job', 'log', 'mop', 'not', 'pod', 'pop', 'pot', 'rot', 'top', 'sob'],
+          u: ['bug', 'cup', 'cut', 'fun', 'gum', 'hug', 'jug', 'mud', 'nut', 'pup', 'run', 'sun', 'tug', 'bud', 'bus']
         },
         ccvc: {
-          a: ['brag', 'clap', 'crab', 'drag', 'flag', 'flap', 'glad', 'grab', 'plan', 'slam', 'snap', 'trap', 'flat', 'swat', 'chat', 'blab', 'clam', 'drab', 'slap', 'stab', 'tram', 'bran'],
-          e: ['bled', 'bred', 'fled', 'fret', 'glen', 'pled', 'sled', 'stem', 'step', 'trek', 'prep', 'flex', 'smell', 'blend', 'crest', 'dress', 'press', 'spell', 'swell', 'wreck'],
-          i: ['brim', 'clip', 'crib', 'drip', 'flip', 'grin', 'grip', 'skip', 'slim', 'snip', 'spin', 'trip', 'skin', 'swim', 'blip', 'chip', 'slip', 'strip', 'trick'],
-          o: ['blot', 'clog', 'crop', 'drop', 'flop', 'frog', 'glob', 'plot', 'prop', 'shop', 'slot', 'stop', 'trot', 'clot', 'spot', 'snot'],
-          u: ['club', 'drum', 'grub', 'plug', 'slug', 'snug', 'spun', 'stub', 'stun', 'flub', 'glut', 'plum', 'scum', 'shut', 'flux', 'shun']
+          a: ['brag', 'clap', 'crab', 'drag', 'flag', 'flap', 'glad', 'grab', 'plan', 'slam', 'snap', 'trap', 'flat', 'swat', 'chat'],
+          e: ['bled', 'bred', 'fled', 'fret', 'glen', 'pled', 'sled', 'spec', 'stem', 'step', 'trek', 'prep', 'flex', 'dred', 'smell'],
+          i: ['brim', 'clip', 'crib', 'drip', 'flip', 'grin', 'grip', 'skip', 'slim', 'snip', 'spin', 'trip', 'twig', 'skin', 'swim'],
+          o: ['blot', 'clog', 'crop', 'drop', 'flop', 'frog', 'glob', 'plot', 'prop', 'shop', 'slot', 'stop', 'trot', 'clot', 'spot'],
+          u: ['club', 'drum', 'grub', 'plug', 'slug', 'snug', 'spun', 'stub', 'stun', 'trud', 'flub', 'glut', 'plum', 'scum', 'shut']
         },
         cvcc: {
-          a: ['band', 'bank', 'damp', 'hand', 'lamp', 'land', 'pant', 'ramp', 'sand', 'tank', 'gasp'],
-          e: ['bend', 'dent', 'felt', 'lend', 'mend', 'nest', 'rest', 'sent', 'tent', 'vest', 'best', 'jest', 'pest', 'test', 'west', 'belt', 'rent', 'went', 'zest', 'left'],
-          i: ['film', 'hint', 'lift', 'milk', 'mint', 'pink', 'ring', 'silk', 'sink', 'tilt', 'disk', 'fist', 'list', 'mist', 'wish', 'gilt', 'kilt', 'silt', 'risk'],
-          o: ['bond', 'cost', 'fond', 'lost', 'most', 'pond', 'post', 'soft'],
-          u: ['bump', 'bunk', 'dust', 'hunt', 'jump', 'just', 'lump', 'must', 'rust', 'dunk', 'fuss', 'gust', 'husk', 'tusk', 'bust', 'musk', 'dusk']
+          a: ['band', 'bank', 'damp', 'hand', 'lamp', 'land', 'pant', 'ramp', 'sand', 'tank', 'fast', 'last', 'past', 'cast', 'raft'],
+          e: ['bend', 'dent', 'felt', 'lend', 'mend', 'nest', 'rest', 'sent', 'tent', 'vest', 'best', 'jest', 'pest', 'test', 'west'],
+          i: ['film', 'hint', 'lift', 'milk', 'mint', 'pink', 'ring', 'silk', 'sink', 'tilt', 'disk', 'fist', 'list', 'mist', 'wish'],
+          o: ['bond', 'cost', 'fond', 'host', 'lost', 'most', 'pond', 'post', 'soft', 'bolt', 'colt', 'jolt', 'molt', 'roll', 'told'],
+          u: ['bump', 'bunk', 'dust', 'hunt', 'jump', 'just', 'lump', 'must', 'rust', 'dunk', 'cusp', 'fuss', 'gust', 'husk', 'tusk']
         },
         ccvcc: {
-          a: ['brand', 'clamp', 'cramp', 'drank', 'flank', 'frank', 'plank', 'prank', 'stamp', 'stand', 'bland', 'tramp'],
-          e: ['blend', 'fleck', 'flesh', 'spend', 'strep', 'swept', 'trend', 'bless', 'crept', 'dress', 'fresh', 'press', 'slept', 'smelt', 'spent', 'twist'],
-          i: ['blink', 'clink', 'crisp', 'drink', 'flint', 'print', 'slink', 'stink', 'twist', 'brisk', 'cling', 'fling', 'shift', 'swift', 'drift', 'grill'],
-          o: ['blond', 'chomp', 'frost', 'prompt', 'stomp', 'strong', 'throb', 'clonk', 'floss', 'gloss', 'gross', 'prong', 'scoff'],
-          u: ['blunt', 'brunt', 'clump', 'crust', 'drunk', 'flung', 'grunt', 'plump', 'stump', 'trunk', 'brush', 'crush', 'flush', 'shrug']
+          a: ['brand', 'clamp', 'cramp', 'drank', 'flank', 'frank', 'plank', 'prank', 'stamp', 'plant', 'stand'],
+          e: ['blend', 'fleck', 'flesh', 'spend', 'strep', 'swept', 'trend', 'bless', 'crept', 'dress', 'fresh', 'press', 'slept', 'smelt', 'spent'],
+          i: ['blink', 'clink', 'crisp', 'drink', 'flint', 'print', 'slink', 'stink', 'twist', 'brisk', 'cling', 'fling', 'grift', 'shift', 'swift'],
+          o: ['blond', 'chomp', 'frost', 'prompt', 'stomp', 'strong', 'throb', 'clonk', 'floss', 'gloss', 'gross', 'prong', 'scoff', 'snort', 'thong'],
+          u: ['blunt', 'brunt', 'clump', 'crust', 'drunk', 'flung', 'grunt', 'plump', 'stump', 'trunk', 'brush', 'crush', 'flush', 'shrug', 'slush']
         },
         digraphs: {
-          a: ['chat', 'chap', 'than', 'that', 'math', 'bash', 'cash', 'dash', 'lash', 'rash', 'shag', 'sham', 'wham'],
+          a: ['chat', 'chap', 'than', 'that', 'math', 'path', 'bash', 'cash', 'dash', 'lash', 'rash', 'shag', 'sham', 'wham'],
           e: ['shed', 'them', 'then', 'fetch', 'bench', 'check', 'chess', 'fresh', 'retch', 'shell', 'shred', 'theft', 'wrench'],
-          i: ['chip', 'chin', 'thin', 'ship', 'shin', 'chick', 'chill', 'shift', 'thick', 'thing', 'wish', 'whip', 'whiz'],
-          o: ['shop', 'shot', 'chop', 'shock', 'cloth', 'froth', 'notch', 'shod', 'sloth', 'thong', 'chock', 'throb'],
-          u: ['shut', 'thud', 'chug', 'chunk', 'thump', 'brush', 'crush', 'flush', 'shrug', 'blush', 'thumb']
+          i: ['chip', 'chin', 'thin', 'ship', 'shin', 'chick', 'chill', 'shift', 'thick', 'thing', 'wish'],
+          o: ['shop', 'shot', 'chop', 'shock', 'cloth', 'froth', 'notch', 'shod', 'sloth', 'thong'],
+          u: ['shut', 'thud', 'chug', 'chunk', 'thump', 'brush', 'crush', 'flush', 'shrug', 'blush', 'shuck', 'stuck', 'thumb']
         },
         extended: {
-          a: ['fantastic', 'smashing', 'crashing', 'stamping', 'clapping', 'tracking', 'snapping', 'flashing', 'grabbing', 'slashing', 'camping'],
+          a: ['fantastic', 'smashing', 'crashing', 'stamping', 'clapping', 'tracking', 'snapping', 'flashing', 'grabbing', 'slashing'],
           e: ['wrecking', 'spelling', 'pressing', 'dressing', 'fetching', 'stretching', 'checking', 'swelling', 'shedding', 'tempting'],
-          i: ['blinking', 'drinking', 'tripping', 'flipping', 'snipping', 'skipping', 'swinging', 'slipping', 'twisting'],
+          i: ['blinking', 'drinking', 'tripping', 'flipping', 'snipping', 'skipping', 'swinging', 'chirping', 'slipping', 'twisting'],
           o: ['blocking', 'rocking', 'crossing', 'stopping', 'chopping', 'dropping', 'flopping', 'locking', 'shocking', 'trotting'],
           u: ['jumping', 'bumping', 'hunting', 'rushing', 'crushing', 'brushing', 'dumping', 'hugging', 'running', 'tugging']
         },
         silentE: {
-          a: ['spade', 'mate', 'game', 'bake', 'gave', 'rake', 'cake', 'lake', 'made', 'name', 'pale', 'sale', 'take', 'wave', 'base', 'case', 'date', 'fate', 'gate', 'hate'],
-          e: ['theme', 'these', 'eve', 'cede', 'gene', 'mete', 'scene', 'pete', 'steve'],
-          i: ['bike', 'kite', 'lime', 'mine', 'pine', 'time', 'dive', 'five', 'hive', 'bite', 'site'],
-          o: ['home', 'nose', 'rope', 'note', 'cone', 'hope', 'robe', 'stone', 'bone', 'dome', 'pole', 'vote'],
-          u: ['cube', 'tune', 'mule', 'rude', 'cute', 'dune', 'june', 'lute', 'mute', 'rule', 'tube']
+          a: ['spade', 'mate', 'game', 'bake', 'gave', 'rake', 'cake', 'lake'],
+          e: ['theme', 'these', 'eve'],
+          i: ['bike', 'kite', 'lime', 'mine', 'pine', 'time', 'dive', 'five'],
+          o: ['home', 'nose', 'rope', 'note', 'cone', 'hope', 'robe', 'stone'],
+          u: ['cube', 'tune', 'mule', 'rude', 'flute', 'cute', 'dune', 'june']
         }
       },
       es: {
         cvc: {
-          a: ['pan', 'sal', 'cal'],
-          e: ['pez', 'mes', 'ten'],
-          i: ['fin', 'sin', 'mil'],
-          o: ['sol', 'col', 'gol'],
-          u: ['luz', 'sur', 'pus']
+          a: ['pan', 'sal', 'cal', 'mal', 'tal', 'dar', 'bar', 'far', 'mar', 'par', 'ras', 'vas', 'las', 'cas', 'gas'],
+          e: ['pez', 'mes', 'ten', 'ven', 'cen', 'ser', 'ver', 'des', 'res', 'les', 'net', 'set', 'fet', 'get', 'ben'],
+          i: ['fin', 'sin', 'mil', 'vil', 'gil', 'din', 'bin', 'rin', 'min', 'pin', 'tir', 'sir', 'mir', 'lir', 'zir'],
+          o: ['sol', 'col', 'gol', 'mol', 'tol', 'don', 'son', 'ton', 'ron', 'fon', 'por', 'cor', 'mor', 'bor', 'zor'],
+          u: ['luz', 'sur', 'pus', 'mus', 'tus', 'dul', 'rul', 'sul', 'mul', 'nul', 'tur', 'bur', 'cur', 'dur', 'zur']
         },
         ccvc: {
           a: ['clan', 'flan', 'plan', 'tras', 'cruz', 'bran', 'gran', 'fran', 'dran', 'pran', 'slap', 'snap', 'trap', 'clap', 'glad'],
@@ -93,6 +107,7 @@ export const loadWordGroups = async () => {
         digraphs: {
           a: ['chan', 'chas', 'char', 'chal', 'cham', 'chap', 'chaz', 'chac', 'chaf', 'chag', 'bash', 'cash', 'dash', 'lash', 'rash'],
           e: ['chez', 'chem', 'chen', 'cher', 'ches', 'chet', 'cheb', 'chec', 'chef', 'cheg', 'shed', 'them', 'then', 'fetch', 'bench'],
+
           i: ['chin', 'chip', 'chir', 'chis', 'chic', 'chif', 'chig', 'chil', 'chim', 'chiz', 'wish', 'ship', 'shin', 'chick', 'chill'],
           o: ['chon', 'chop', 'chor', 'chos', 'choc', 'chof', 'chog', 'chol', 'chom', 'choz', 'shop', 'shot', 'chop', 'shock', 'cloth'],
           u: ['chuz', 'chum', 'chun', 'chur', 'chus', 'chub', 'chuc', 'chuf', 'chug', 'chul', 'shut', 'thud', 'chug', 'chunk', 'thump']
