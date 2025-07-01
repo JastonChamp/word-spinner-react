@@ -3,12 +3,7 @@ import { GameContext } from '../context/GameContext';
 import '../styles/ActionButtons.css';
 
 const ActionButtons = () => {
-  const context = useContext(GameContext);
-
-  // context is used for dispatching game actions
-
-  // Fallback if dispatch is undefined
-  const dispatch = context?.dispatch || (() => console.error('Dispatch is not available'));
+const { state, dispatch } = useContext(GameContext);
 
   const handleSpin = () => {
     dispatch({ type: 'SPIN_WORD' });
@@ -25,8 +20,8 @@ const ActionButtons = () => {
   return (
     <div className="action-buttons">
       <button onClick={handleSpin}>Spin</button>
-      <button onClick={handleRepeat}>Repeat</button>
-      <button onClick={handleHint}>Hint</button>
+     <button onClick={handleRepeat} disabled={!state.currentWord}>Repeat</button>
+      <button onClick={handleHint} disabled={!state.currentWord}>Hint</button>
     </div>
   );
 };
