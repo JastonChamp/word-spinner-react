@@ -31,7 +31,7 @@ export const speakWord = async (text, soundsEnabled) => {
 export const preloadAudio = (sounds) => {
   sounds.forEach(sound => {
     const audioUrl = `${BASE_PATH}/audio/${sound}.mp3`;
-    console.log(`Preloading audio: ${audioUrl}`); // Debug log
+     console.log(`Preloading audio: ${audioUrl}`); // Debug log
     const audio = new Audio(audioUrl);
     audio.preload = 'auto';
     audioCache.set(sound, audio);
