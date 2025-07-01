@@ -15,4 +15,20 @@ describe('GameContext reducer', () => {
     const result = reducer(state, { type: 'SET_PREFERENCES', payload: { theme: 'dark' } });
     expect(result.theme).toBe('dark');
   });
+  
+  it('adds a badge only once', () => {
+    let state = { ...initialState, badges: [] };
+    state = reducer(state, { type: 'ADD_BADGE', payload: 'First Word' });
+    expect(state.badges).toContain('First Word');
+    const again = reducer(state, { type: 'ADD_BADGE', payload: 'First Word' });
+    expect(again.badges).toHaveLength(1);
+  });
+
+  it('shows and hides score increment', () => {
+    const state = reducer(initialState, { type: 'SHOW_SCORE_INCREMENT', payload: 10 });
+    expect(state.showScoreIncrement).toBe(true);
+    expect(state.scoreIncrement).toBe(10);
+    const hidden = reducer(state, { type: 'HIDE_SCORE_INCREMENT' });
+    expect(hidden.showScoreIncrement).toBe(false);
+  });
 });
