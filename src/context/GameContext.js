@@ -29,6 +29,9 @@ export const initialState = {
   mode: 'phonics',
   showTutorial: false,
   showPhonicsIntro: false,
+  badges: [],
+  showScoreIncrement: false,
+  scoreIncrement: 0,
 };
 
 export const reducer = (state, action) => {
@@ -67,6 +70,13 @@ export const reducer = (state, action) => {
       return { ...state, ...action.payload };
     case 'INCORRECT_ANSWER':
       return { ...state, ...action.payload };
+      case 'ADD_BADGE':
+      if (state.badges.includes(action.payload)) return state;
+      return { ...state, badges: [...state.badges, action.payload] };
+    case 'SHOW_SCORE_INCREMENT':
+      return { ...state, showScoreIncrement: true, scoreIncrement: action.payload };
+    case 'HIDE_SCORE_INCREMENT':
+      return { ...state, showScoreIncrement: false };
     case 'SET_TOTAL_WORDS':
       return { ...state, totalWords: action.payload };
     case 'UPDATE_THEME':
