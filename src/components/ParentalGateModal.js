@@ -6,16 +6,13 @@ import '../styles/Modal.css';
 Modal.setAppElement('#root');
 
 const ParentalGateModal = () => {
-  const { state, setState } = useContext(GameContext);
+const { state, dispatch } = useContext(GameContext);
   const [answer, setAnswer] = useState('');
 
   const handleSubmit = () => {
     if (parseInt(answer, 10) === 5) {
-      setState(prev => ({
-        ...prev,
-        showParentalGate: false,
-        showSettings: !prev.showSettings,
-      }));
+      dispatch({ type: 'SHOW_PARENTAL_GATE', payload: false });
+      dispatch({ type: 'TOGGLE_SETTINGS' });
     } else {
       alert('Incorrect answer. Please try again.');
     }
@@ -25,7 +22,7 @@ const ParentalGateModal = () => {
   return (
     <Modal
       isOpen={state.showParentalGate}
-      onRequestClose={() => setState(prev => ({ ...prev, showParentalGate: false }))}
+      onRequestClose={() => dispatch({ type: 'SHOW_PARENTAL_GATE', payload: false })}
       className="modal-content"
       overlayClassName="modal-overlay"
     >
