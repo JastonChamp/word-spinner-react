@@ -45,6 +45,9 @@ export const reducer = (state, action) => {
       const newWord = availableWords[Math.floor(Math.random() * availableWords.length)] || words[0];
       const newUsedWords = new Set(state.usedWords);
       newUsedWords.add(newWord);
+       if (state.soundsEnabled) {
+        speakWord(newWord, state.soundsEnabled);
+      }
       return {
         ...state,
         currentWord: newWord,
