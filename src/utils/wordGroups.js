@@ -118,21 +118,6 @@ export const loadWordGroups = async () => {
 
 export const getWordGroups = () => {
   const language = i18n.language || 'en';
-        },
-        silentE: {
-          a: ['cabe', 'sabe', 'hace', 'pace', 'lace', 'mace', 'nace', 'race'],
-          e: ['cede', 'deje', 'leve'],
-          i: ['bibe', 'dime', 'lime', 'mime', 'nime', 'pime', 'rime', 'time'],
-          o: ['bode', 'code', 'lode', 'mode', 'node', 'pode', 'rode', 'sode'],
-          u: ['cune', 'dune', 'fune', 'lune', 'mune', 'nune', 'pune', 'rune']
-        }
-      }
-    };
-  }
-};
-
-export const getWordGroups = () => {
-  const language = i18n.language || 'en';
   return wordGroups[language] || wordGroups['en'];
 };
 
