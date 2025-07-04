@@ -14,7 +14,7 @@ import PhonicsIntroModal from './components/PhonicsIntroModal';
 import BadgeDisplay from './components/BadgeDisplay';
 import ScoreIncrement from './components/ScoreIncrement';
 import Confetti from 'react-confetti';
-import { initSpeech, playSound } from './utils/speech';
+import { initSpeech } from './utils/speech';
 import './styles/App.css';
 
 const AppContent = () => {
@@ -29,13 +29,6 @@ const AppContent = () => {
     document.body.dataset.theme = state.theme;
     document.body.dataset.font = state.fontStyle;
   }, [state.theme, state.fontStyle]);
-
-  // Play start sound after user interaction
-  useEffect(() => {
-    if (hasInteracted && state.soundsEnabled) {
-          playSound('start', state.soundsEnabled);
-    }
-  }, [hasInteracted, state.soundsEnabled]);
 
   // Listen for user interaction
   useEffect(() => {
