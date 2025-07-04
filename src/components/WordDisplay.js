@@ -34,5 +34,3 @@ const WordDisplay = () => {
 };
 
 export default WordDisplay;
-
-export default WordDisplay;
