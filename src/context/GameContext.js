@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getWordGroups, loadWordGroups } from '../utils/wordGroups';
-import { speakWord } from '../utils/speech';
+import { speakWord, playWordSounds } from '../utils/speech';
 export const GameContext = createContext();
 
 export const initialState = {
@@ -55,8 +55,8 @@ export const reducer = (state, action) => {
         words[0];
 
       usedWords.add(newWord);
-      if (state.soundsEnabled) {
-        speakWord(newWord, state.soundsEnabled);
+     if (state.soundsEnabled) {
+        playWordSounds(newWord, state.soundsEnabled, state.wordType);
       }
       return {
         ...state,
@@ -67,12 +67,12 @@ export const reducer = (state, action) => {
     }
     case 'REPEAT_WORD':
       if (state.currentWord && state.soundsEnabled) {
-        speakWord(state.currentWord, state.soundsEnabled);
+       playWordSounds(state.currentWord, state.soundsEnabled, state.wordType);
       }
       return state;
     case 'SHOW_HINT':
       if (state.currentWord && state.soundsEnabled) {
-        speakWord(state.currentWord, state.soundsEnabled);
+         playWordSounds(state.currentWord, state.soundsEnabled, state.wordType);
       }
       return state;
     case 'SHOW_PARENTAL_GATE':
