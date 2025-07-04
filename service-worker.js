@@ -3,9 +3,7 @@ const BASE_PATH = self.location.pathname.replace(/\/service-worker\.js$/, '');
 const urlsToCache = [
   `${BASE_PATH}/`,
   `${BASE_PATH}/index.html`,
-  `${BASE_PATH}/static/js/main.chunk.js`, // Adjust based on your build output
-  `${BASE_PATH}/static/js/0.chunk.js`,
-  `${BASE_PATH}/static/js/bundle.js`,
+  `${BASE_PATH}/static/js/main.fb9b270a.js`,
   `${BASE_PATH}/wordGroups.json`, // Word lists for offline use
   // Cache all audio files from the public/audio/ directory
   `${BASE_PATH}/audio/a.mp3`,
@@ -34,6 +32,10 @@ const urlsToCache = [
   `${BASE_PATH}/audio/x.mp3`,
   `${BASE_PATH}/audio/y.mp3`,
   `${BASE_PATH}/audio/z.mp3`,
+  `${BASE_PATH}/audio/ch.mp3`,
+  `${BASE_PATH}/audio/sh.mp3`,
+  `${BASE_PATH}/audio/th.mp3`,
+  `${BASE_PATH}/audio/ng.mp3`,
   `${BASE_PATH}/audio/long_a.mp3`,
   `${BASE_PATH}/audio/long_e.mp3`,
   `${BASE_PATH}/audio/long_i.mp3`,
