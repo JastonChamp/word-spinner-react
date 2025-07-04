@@ -38,8 +38,7 @@ const urlsToCache = [
   `${BASE_PATH}/audio/long_e.mp3`,
   `${BASE_PATH}/audio/long_i.mp3`,
   `${BASE_PATH}/audio/long_o.mp3`,
-  `${BASE_PATH}/audio/long_u.mp3`,
-  `${BASE_PATH}/audio/start.mp3`
+ `${BASE_PATH}/audio/long_u.mp3`
 ];
 
 // Install event: Cache the specified assets
