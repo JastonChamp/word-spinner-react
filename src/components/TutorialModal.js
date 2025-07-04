@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
 import { GameContext } from '../context/GameContext';
-import { playSound } from '../utils/speech';
 import '../styles/Modal.css';
 
 Modal.setAppElement('#root');
@@ -17,7 +16,6 @@ const TutorialModal = () => {
   const handleStart = () => {
     localStorage.setItem('hasSeenTutorial', 'true');
     dispatch({ type: 'SET_PREFERENCES', payload: { showTutorial: false } });
-    if (state.soundsEnabled) playSound('start', state.soundsEnabled);
   };
 
 const handleSkip = () => {
