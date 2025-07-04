@@ -57,3 +57,48 @@ export const playSound = async (sound, soundsEnabled) => {
 
 const soundsToPreload = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'long_a', 'long_e', 'long_i', 'long_o', 'long_u'];
 preloadAudio(soundsToPreload);
+
+export const parseWord = (word) => {
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  const digraphs = ['ch', 'sh', 'th', 'ng'];
+  const units = [];
+  let i = 0;
+  const lower = word.toLowerCase();
+
+  while (i < lower.length) {
+    const pair = lower.slice(i, i + 2);
+    if (digraphs.includes(pair)) {
+      units.push({ text: pair, isVowel: false, isDigraph: true, isLongVowel: false, isSilent: false });
+      i += 2;
+      continue;
+    }
+
+    const char = lower[i];
+    const isVowel = vowels.includes(char);
+    const isSilent = char === 'e' && i === lower.length - 1 && lower.length > 1;
+    let isLongVowel = false;
+
+    if (isVowel && !isSilent && lower.endsWith('e')) {
+      const between = lower.slice(i + 1, lower.length - 1);
+      if (between && [...between].every(c => !vowels.includes(c))) {
+        isLongVowel = true;
+      }
+    }
+
+    units.push({ text: char, isVowel, isDigraph: false, isLongVowel, isSilent });
+    i += 1;
+  }
+
+  return units;
+};
+
+export const playWordSounds = async (word, soundsEnabled, wordType) => {
+  const units = parseWord(word);
+  for (const unit of units) {
+    if (unit.isSilent) continue;
+    const clip = unit.isLongVowel ? `long_${unit.text}` : unit.text;
+    // eslint-disable-next-line no-await-in-loop
+    await playSound(clip, soundsEnabled);
+  }
+  await speakWord(word, soundsEnabled);
+};
