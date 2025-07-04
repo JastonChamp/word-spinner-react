@@ -41,18 +41,28 @@ export const reducer = (state, action) => {
       const words = state.vowelFilter === 'all'
         ? Object.values(wordGroups[state.wordType] || {}).flat()
         : wordGroups[state.wordType]?.[state.vowelFilter] || [];
-      const availableWords = words.filter(word => !state.usedWords.has(word));
-      const newWord = availableWords[Math.floor(Math.random() * availableWords.length)] || words[0];
-      const newUsedWords = new Set(state.usedWords);
-      newUsedWords.add(newWord);
-       if (state.soundsEnabled) {
+       let availableWords = words.filter(word => !state.usedWords.has(word));
+      let usedWords = new Set(state.usedWords);
+
+      if (availableWords.length === 0) {
+        // reset when all words have been used
+        usedWords = new Set();
+        availableWords = words;
+      }
+
+      const newWord =
+        availableWords[Math.floor(Math.random() * availableWords.length)] ||
+        words[0];
+
+      usedWords.add(newWord);
+      if (state.soundsEnabled) {
         speakWord(newWord, state.soundsEnabled);
       }
       return {
         ...state,
         currentWord: newWord,
         showInteractiveInput: true,
-        usedWords: newUsedWords,
+        usedWords,
       };
     }
     case 'REPEAT_WORD':
