@@ -65,3 +65,5 @@ self.addEventListener('fetch', event => {
           console.error('Fetch failed; returning offline page instead.');
         });
       })
+  );
+});
