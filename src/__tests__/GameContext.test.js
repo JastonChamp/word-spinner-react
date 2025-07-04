@@ -1,10 +1,10 @@
 jest.mock('react-i18next', () => ({ useTranslation: () => ({ i18n: { language: 'en' } }) }), { virtual: true });
 jest.mock('../utils/wordGroups', () => ({ getWordGroups: jest.fn(), loadWordGroups: jest.fn() }));
-jest.mock('../utils/speech', () => ({ speakWord: jest.fn() }));
+jest.mock('../utils/speech', () => ({ playWordSounds: jest.fn(), speakWord: jest.fn() }));
 
 import { reducer, initialState } from '../context/GameContext';
 import { getWordGroups } from '../utils/wordGroups';
-import { speakWord } from '../utils/speech';
+import { playWordSounds } from '../utils/speech';
 
 
 describe('GameContext reducer', () => {
@@ -43,8 +43,8 @@ describe('GameContext reducer', () => {
     jest.spyOn(Math, 'random').mockReturnValue(0);
     const state = { ...initialState, soundsEnabled: true, usedWords: new Set() };
     reducer(state, { type: 'SPIN_WORD' });
-    expect(speakWord).toHaveBeenCalledTimes(1);
-    expect(speakWord).toHaveBeenCalledWith('cat', true);
+   expect(playWordSounds).toHaveBeenCalledTimes(1);
+    expect(playWordSounds).toHaveBeenCalledWith('cat', true, 'cvc');
     Math.random.mockRestore();
   });
   
