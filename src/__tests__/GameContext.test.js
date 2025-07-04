@@ -47,4 +47,20 @@ describe('GameContext reducer', () => {
     expect(speakWord).toHaveBeenCalledWith('cat', true);
     Math.random.mockRestore();
   });
+  
+  it('resets usedWords when all words are used', () => {
+    getWordGroups.mockReturnValue({
+      cvc: { all: ['cat', 'dog'] },
+    });
+    jest.spyOn(Math, 'random').mockReturnValue(0);
+    const state = {
+      ...initialState,
+      soundsEnabled: false,
+      usedWords: new Set(['cat', 'dog']),
+    };
+    const result = reducer(state, { type: 'SPIN_WORD' });
+    expect(result.usedWords.size).toBe(1);
+    expect(result.usedWords.has('cat')).toBe(true);
+    Math.random.mockRestore();
+  });
 });
