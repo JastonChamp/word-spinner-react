@@ -1,8 +1,3 @@
-diff --git a//dev/null b/README.md
-index 0000000000000000000000000000000000000000..3457af22a7fb009fca4956d725f96ac5336d782b 100644
---- a//dev/null
- b/README.md
- -0,0 1,37 
 # Word Spinner React (Build)
 
 This branch hosts the compiled build of **Word Spinner**, a React-based phonics game that lets children practice blending sounds into words. The playable site is served via GitHub Pages.
