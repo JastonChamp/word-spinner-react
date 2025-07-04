@@ -28,6 +28,19 @@ animation: popLetter 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 color: #ff7675;
 }
 
+.word-display .digraph {
+  color: #2ecc71;
+}
+
+.word-display .long-vowel {
+  color: #ff7675;
+  font-style: italic;
+}
+
+.word-display .silent {
+  color: #ccc;
+}
+
 @keyframes popLetter {
 to {
 opacity: 1;
