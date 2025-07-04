@@ -1,44 +1,43 @@
 const CACHE_NAME = 'word-spinner-cache-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/static/js/main.chunk.js', // Adjust based on your build output
-  '/static/js/0.chunk.js',
-  '/static/js/bundle.js',
-  '/wordGroups.json', // Word lists for offline use
+  '/word-spinner-react/',
+  '/word-spinner-react/index.html',
+  '/word-spinner-react/static/js/main.35df2e7a.js',
+  '/word-spinner-react/static/css/main.e6833e7f.css',
+  '/word-spinner-react/wordGroups.json', // Word lists for offline use
   // Cache all audio files from the public/audio/ directory
-  '/audio/a.mp3',
-  '/audio/b.mp3',
-  '/audio/c.mp3',
-  '/audio/d.mp3',
-  '/audio/e.mp3',
-  '/audio/f.mp3',
-  '/audio/g.mp3',
-  '/audio/h.mp3',
-  '/audio/i.mp3',
-  '/audio/j.mp3',
-  '/audio/k.mp3',
-  '/audio/l.mp3',
-  '/audio/m.mp3',
-  '/audio/n.mp3',
-  '/audio/o.mp3',
-  '/audio/p.mp3',
-  '/audio/q.mp3',
-  '/audio/r.mp3',
-  '/audio/s.mp3',
-  '/audio/t.mp3',
-  '/audio/u.mp3',
-  '/audio/v.mp3',
-  '/audio/w.mp3',
-  '/audio/x.mp3',
-  '/audio/y.mp3',
-  '/audio/z.mp3',
-  '/audio/long_a.mp3',
-  '/audio/long_e.mp3',
-  '/audio/long_i.mp3',
-  '/audio/long_o.mp3',
-  '/audio/long_u.mp3',
-  '/audio/start.mp3'
+  '/word-spinner-react/audio/a.mp3',
+  '/word-spinner-react/audio/b.mp3',
+  '/word-spinner-react/audio/c.mp3',
+  '/word-spinner-react/audio/d.mp3',
+  '/word-spinner-react/audio/e.mp3',
+  '/word-spinner-react/audio/f.mp3',
+  '/word-spinner-react/audio/g.mp3',
+  '/word-spinner-react/audio/h.mp3',
+  '/word-spinner-react/audio/i.mp3',
+  '/word-spinner-react/audio/j.mp3',
+  '/word-spinner-react/audio/k.mp3',
+  '/word-spinner-react/audio/l.mp3',
+  '/word-spinner-react/audio/m.mp3',
+  '/word-spinner-react/audio/n.mp3',
+  '/word-spinner-react/audio/o.mp3',
+  '/word-spinner-react/audio/p.mp3',
+  '/word-spinner-react/audio/q.mp3',
+  '/word-spinner-react/audio/r.mp3',
+  '/word-spinner-react/audio/s.mp3',
+  '/word-spinner-react/audio/t.mp3',
+  '/word-spinner-react/audio/u.mp3',
+  '/word-spinner-react/audio/v.mp3',
+  '/word-spinner-react/audio/w.mp3',
+  '/word-spinner-react/audio/x.mp3',
+  '/word-spinner-react/audio/y.mp3',
+  '/word-spinner-react/audio/z.mp3',
+  '/word-spinner-react/audio/long_a.mp3',
+  '/word-spinner-react/audio/long_e.mp3',
+  '/word-spinner-react/audio/long_i.mp3',
+  '/word-spinner-react/audio/long_o.mp3',
+  '/word-spinner-react/audio/long_u.mp3',
+  '/word-spinner-react/audio/start.mp3'
 ];
 
 // Install event: Cache the specified assets
@@ -64,6 +63,7 @@ self.addEventListener('fetch', event => {
           console.error('Fetch failed; returning offline page instead.');
         });
       })
+
   );
 });
 
