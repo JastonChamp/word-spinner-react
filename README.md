@@ -28,7 +28,7 @@ Try the app live at [https://JastonChamp.github.io/word-spinner-react/](https://
 - **Educational Alignment:** Word lists are aligned with the Singapore MOE phonics curriculum.
 - **Engaging Design:** Playful animations, confetti celebrations, and immediate feedback to motivate young learners.
 - **Tutorial and Phonics Intro:** Interactive tutorial for first-time users and a phonics basics introduction.
-- **Real Audio Files:** Includes real `.mp3` audio files for phoneme sounds, long vowels, and start sounds to enhance the learning experience.
+- **Real Audio Files:** Includes real `.mp3` audio files for phoneme sounds and long vowels to enhance the learning experience.
 - **Offline Functionality:** Works offline using a Service Worker to cache assets like word lists and audio files.
 - **Multi-Language Support:** Supports English and Spanish word lists with UI translations.
 
