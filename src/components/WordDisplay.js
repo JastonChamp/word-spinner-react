@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { GameContext } from '../context/GameContext';
+import { parseWord } from '../utils/parseWord';
 import '../styles/WordDisplay.css';
 
 const WordDisplay = () => {
@@ -7,10 +8,7 @@ const WordDisplay = () => {
 
   if (!state.currentWord) return null;
 
-  const units = state.currentWord.split('').map(letter => ({
-    text: letter,
-    isVowel: /[aeiou]/.test(letter),
-  }));
+  const units = parseWord(state.currentWord);
 
   return (
     <div className="word-display-container">
@@ -18,7 +16,7 @@ const WordDisplay = () => {
         {units.map((unit, i) => (
           <span
             key={i}
-            className={`letter ${unit.isVowel ? 'vowel' : ''}`}
+            className={`letter ${unit.type}`.trim()}
             style={{ animationDelay: `${i * 0.4}s` }}
           >
             {unit.text}
@@ -34,5 +32,7 @@ const WordDisplay = () => {
     </div>
   );
 };
+
+export default WordDisplay;
 
 export default WordDisplay;
